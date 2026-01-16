@@ -1,4 +1,139 @@
 {
+  "api": {
+    "base_url": "https://testapp2.demdikk.sn/api",
+    "endpoints": {
+      "arrets_bus": {
+        "description": "Localisation et géolocalisation de l'ensemble des arrêts de bus",
+        "method": "GET",
+        "url": "https://testapp2.demdikk.sn/api/arret-bus?per_page=50",
+        "returns": [
+          "id",
+          "nom_arret",
+          "latitude",
+          "longitude",
+          "ligne_associee"
+        ],
+        "usage": [
+          "Carte interactive",
+          "Recherche d'arrêts",
+          "Calcul d'itinéraire"
+        ]
+      },
+      "infos_voyageurs": {
+        "description": "Actualités et informations voyageurs (triées par date décroissante)",
+        "method": "GET",
+        "url": "https://testapp2.demdikk.sn/api/info?per_page=50",
+        "order": "DESC",
+        "returns": [
+          "titre",
+          "image",
+          "description",
+          "date_publication"
+        ],
+        "usage": [
+          "Fil d'actualité",
+          "Alertes voyageurs",
+          "Notifications"
+        ]
+      },
+      "reservation_trajets": {
+        "description": "Processus de réservation des trajets (Navette AIBD, Sénégal Dem Dikk, Afrique Dem Dikk)",
+        "method": "GET",
+        "url_template": "https://testapp2.demdikk.sn/api/trajets/{depart}/{ville_depart}/{type_arrivee}",
+        "example": "https://testapp2.demdikk.sn/api/trajets/1/Dakar/arrivee",
+        "flow": [
+          "Choisir le type de service",
+          "Choisir la ville de départ",
+          "Choisir la destination",
+          "Afficher les horaires et disponibilités",
+          "Redirection vers la plateforme de réservation"
+        ]
+      }
+    }
+  },
+
+  "reservation_en_ligne": {
+    "description": "Plateforme officielle de réservation pour la liaison Dakar ↔ AIBD",
+    "url": "https://booking.demdikk.sn/reservation.php",
+    "restrictions": "Réservations uniquement pour la navette aéroport",
+    "paiement": [
+      "Carte bancaire",
+      "Mobile Money"
+    ]
+  },
+
+  "reseaux_sociaux": {
+    "linkedin": {
+      "name": "Dakar Dem Dikk",
+      "url": "https://sn.linkedin.com/company/dakar-dem-dikk",
+      "usage": "Communication institutionnelle et offres d'emploi"
+    },
+    "youtube": {
+      "name": "DemDikk TV",
+      "url": "https://www.youtube.com/c/DemDikkTV",
+      "usage": "Vidéos officielles, campagnes et reportages"
+    },
+    "instagram": {
+      "name": "@dakar_dem_dikk",
+      "url": "https://www.instagram.com/dakar_dem_dikk/",
+      "usage": "Actualités visuelles et engagement communautaire"
+    },
+    "x_twitter": {
+      "name": "@dakardemdikk1",
+      "url": "https://x.com/dakardemdikk1?lang=fr",
+      "usage": "Informations rapides et annonces"
+    },
+    "tiktok": {
+      "name": "@demdikkofficiel",
+      "url": "https://www.tiktok.com/@demdikkofficiel",
+      "usage": "Contenu vidéo court et sensibilisation"
+    },
+    "facebook": {
+      "name": "Dakar Dem Dikk Officiel",
+      "url": "https://www.facebook.com/demdikkofficiel/",
+      "usage": "Relation usagers et informations publiques"
+    }
+  },
+
+  "recrutement": {
+    "description": "Offres d'emploi officielles de Dakar Dem Dikk",
+    "url": "https://jobs.demdikk.sn/offres/",
+    "types_postes": [
+      "Administratif",
+      "Technique",
+      "Exploitation",
+      "Maintenance"
+    ],
+    "processus": [
+      "Consultation des offres",
+      "Dépôt de candidature en ligne",
+      "Sélection et contact"
+    ]
+  },
+
+"assistant_rules": {
+  "language": "fr",
+  "tone": "institutionnel, clair et professionnel",
+
+  "source_policy": "Répondre uniquement avec les informations issues du JSON et des API officielles Dakar Dem Dikk",
+
+  "fallback": "Cette information n'est pas disponible dans ma base de connaissances. Veuillez contacter Dakar Dem Dikk au +221 33 824 10 10 ou visiter https://demdikk.sn",
+
+  "api_priority": true,
+
+  "include_url": true,
+  "include_url_policy": "Toujours ajouter le lien officiel de la page source lorsque tu cites une information",
+
+  "response_format": [
+    "Titre clair",
+    "Réponse concise",
+    "Lien officiel"
+  ],
+
+  "format_response": "Structurer les réponses de manière claire avec les URLs pertinentes"
+},
+
+
   "site": {
     "name": "Dakar Demm Dikk",
     "url": "https://demdikk.sn",
@@ -682,11 +817,5 @@
         "phone": "+221 33 824 10 10"
       }
     ]
-  },
-  "assistant_rules": {
-    "source_policy": "Répondre uniquement avec les informations du JSON extraites du site officiel demdikk.sn",
-    "fallback": "Cette information n'est pas disponible dans ma base de connaissances. Veuillez contacter Dakar Dem Dikk au +221 33 824 10 10 ou visiter https://demdikk.sn",
-    "include_url": "Toujours ajouter le lien officiel de la page source lorsque tu cites une information",
-    "format_response": "Structurer les réponses de manière claire avec les URLs pertinentes"
   }
 }
