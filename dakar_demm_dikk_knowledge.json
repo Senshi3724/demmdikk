@@ -1,821 +1,845 @@
 {
-  "api": {
-    "base_url": "https://testapp2.demdikk.sn/api",
-    "endpoints": {
-      "arrets_bus": {
-        "description": "Localisation et géolocalisation de l'ensemble des arrêts de bus",
-        "method": "GET",
-        "url": "https://testapp2.demdikk.sn/api/arret-bus?per_page=50",
-        "returns": [
-          "id",
-          "nom_arret",
-          "latitude",
-          "longitude",
-          "ligne_associee"
+    "api": {
+        "base_url": "https://testapp2.demdikk.sn/api",
+        "endpoints": {
+            "arrets_bus": {
+                "description": "Localisation et géolocalisation de l'ensemble des arrêts de bus",
+                "method": "GET",
+                "url": "https://testapp2.demdikk.sn/api/arret-bus?per_page=50",
+                "returns": [
+                    "id",
+                    "nom_arret",
+                    "latitude",
+                    "longitude",
+                    "ligne_associee"
+                ],
+                "usage": [
+                    "Carte interactive",
+                    "Recherche d'arrêts",
+                    "Calcul d'itinéraire"
+                ]
+            },
+            "infos_voyageurs": {
+                "description": "Actualités et informations voyageurs (triées par date décroissante)",
+                "method": "GET",
+                "url": "https://testapp2.demdikk.sn/api/info?per_page=50",
+                "order": "DESC",
+                "returns": [
+                    "titre",
+                    "image",
+                    "description",
+                    "date_publication"
+                ],
+                "usage": [
+                    "Fil d'actualité",
+                    "Alertes voyageurs",
+                    "Notifications"
+                ]
+            },
+            "reservation_trajets": {
+                "description": "Processus de réservation des trajets (Navette AIBD, Sénégal Dem Dikk, Afrique Dem Dikk)",
+                "method": "GET",
+                "url_template": "https://testapp2.demdikk.sn/api/trajets/{depart}/{ville_depart}/{type_arrivee}",
+                "example": "https://testapp2.demdikk.sn/api/trajets/1/Dakar/arrivee",
+                "flow": [
+                    "Choisir le type de service",
+                    "Choisir la ville de départ",
+                    "Choisir la destination",
+                    "Afficher les horaires et disponibilités",
+                    "Redirection vers la plateforme de réservation"
+                ]
+            }
+        }
+    },
+    "reservation_en_ligne": {
+        "description": "Plateforme officielle de réservation pour la liaison Dakar ↔ AIBD",
+        "url": "https://booking.demdikk.sn/reservation.php",
+        "restrictions": "Réservations uniquement pour la navette aéroport",
+        "paiement": [
+            "Carte bancaire",
+            "Mobile Money"
+        ]
+    },
+    "reseaux_sociaux": {
+        "linkedin": {
+            "name": "Dakar Dem Dikk",
+            "url": "https://sn.linkedin.com/company/dakar-dem-dikk",
+            "usage": "Communication institutionnelle et offres d'emploi"
+        },
+        "youtube": {
+            "name": "DemDikk TV",
+            "url": "https://www.youtube.com/c/DemDikkTV",
+            "usage": "Vidéos officielles, campagnes et reportages"
+        },
+        "instagram": {
+            "name": "@dakar_dem_dikk",
+            "url": "https://www.instagram.com/dakar_dem_dikk/",
+            "usage": "Actualités visuelles et engagement communautaire"
+        },
+        "x_twitter": {
+            "name": "@dakardemdikk1",
+            "url": "https://x.com/dakardemdikk1?lang=fr",
+            "usage": "Informations rapides et annonces"
+        },
+        "tiktok": {
+            "name": "@demdikkofficiel",
+            "url": "https://www.tiktok.com/@demdikkofficiel",
+            "usage": "Contenu vidéo court et sensibilisation"
+        },
+        "facebook": {
+            "name": "Dakar Dem Dikk Officiel",
+            "url": "https://www.facebook.com/demdikkofficiel/",
+            "usage": "Relation usagers et informations publiques"
+        }
+    },
+    "recrutement": {
+        "description": "Offres d'emploi officielles de Dakar Dem Dikk",
+        "url": "https://jobs.demdikk.sn/offres/",
+        "types_postes": [
+            "Administratif",
+            "Technique",
+            "Exploitation",
+            "Maintenance"
         ],
-        "usage": [
-          "Carte interactive",
-          "Recherche d'arrêts",
-          "Calcul d'itinéraire"
+        "processus": [
+            "Consultation des offres",
+            "Dépôt de candidature en ligne",
+            "Sélection et contact"
         ]
-      },
-      "infos_voyageurs": {
-        "description": "Actualités et informations voyageurs (triées par date décroissante)",
-        "method": "GET",
-        "url": "https://testapp2.demdikk.sn/api/info?per_page=50",
-        "order": "DESC",
-        "returns": [
-          "titre",
-          "image",
-          "description",
-          "date_publication"
+    },
+    "assistant_rules": {
+        "language": "fr",
+        "tone": "institutionnel, clair et professionnel",
+        "source_policy": "Répondre uniquement avec les informations issues du JSON et des API officielles Dakar Dem Dikk",
+        "fallback": "Cette information n'est pas disponible dans ma base de connaissances. Veuillez contacter Dakar Dem Dikk au +221 33 824 10 10 ou visiter https://demdikk.sn",
+        "api_priority": true,
+        "include_url": true,
+        "include_url_policy": "Toujours ajouter le lien officiel de la page source lorsque tu cites une information",
+        "response_format": [
+            "Titre clair",
+            "Réponse concise",
+            "Lien officiel"
         ],
-        "usage": [
-          "Fil d'actualité",
-          "Alertes voyageurs",
-          "Notifications"
-        ]
-      },
-      "reservation_trajets": {
-        "description": "Processus de réservation des trajets (Navette AIBD, Sénégal Dem Dikk, Afrique Dem Dikk)",
-        "method": "GET",
-        "url_template": "https://testapp2.demdikk.sn/api/trajets/{depart}/{ville_depart}/{type_arrivee}",
-        "example": "https://testapp2.demdikk.sn/api/trajets/1/Dakar/arrivee",
-        "flow": [
-          "Choisir le type de service",
-          "Choisir la ville de départ",
-          "Choisir la destination",
-          "Afficher les horaires et disponibilités",
-          "Redirection vers la plateforme de réservation"
-        ]
-      }
-    }
-  },
-
-  "reservation_en_ligne": {
-    "description": "Plateforme officielle de réservation pour la liaison Dakar ↔ AIBD",
-    "url": "https://booking.demdikk.sn/reservation.php",
-    "restrictions": "Réservations uniquement pour la navette aéroport",
-    "paiement": [
-      "Carte bancaire",
-      "Mobile Money"
-    ]
-  },
-
-  "reseaux_sociaux": {
-    "linkedin": {
-      "name": "Dakar Dem Dikk",
-      "url": "https://sn.linkedin.com/company/dakar-dem-dikk",
-      "usage": "Communication institutionnelle et offres d'emploi"
+        "format_response": "Structurer les réponses de manière claire avec les URLs pertinentes"
     },
-    "youtube": {
-      "name": "DemDikk TV",
-      "url": "https://www.youtube.com/c/DemDikkTV",
-      "usage": "Vidéos officielles, campagnes et reportages"
+    "site": {
+        "name": "Dakar Demm Dikk",
+        "url": "https://demdikk.sn",
+        "description": "Opérateur public leader des transports terrestres au Sénégal et en Afrique de l'Ouest"
     },
-    "instagram": {
-      "name": "@dakar_dem_dikk",
-      "url": "https://www.instagram.com/dakar_dem_dikk/",
-      "usage": "Actualités visuelles et engagement communautaire"
-    },
-    "x_twitter": {
-      "name": "@dakardemdikk1",
-      "url": "https://x.com/dakardemdikk1?lang=fr",
-      "usage": "Informations rapides et annonces"
-    },
-    "tiktok": {
-      "name": "@demdikkofficiel",
-      "url": "https://www.tiktok.com/@demdikkofficiel",
-      "usage": "Contenu vidéo court et sensibilisation"
-    },
-    "facebook": {
-      "name": "Dakar Dem Dikk Officiel",
-      "url": "https://www.facebook.com/demdikkofficiel/",
-      "usage": "Relation usagers et informations publiques"
-    }
-  },
-
-  "recrutement": {
-    "description": "Offres d'emploi officielles de Dakar Dem Dikk",
-    "url": "https://jobs.demdikk.sn/offres/",
-    "types_postes": [
-      "Administratif",
-      "Technique",
-      "Exploitation",
-      "Maintenance"
-    ],
-    "processus": [
-      "Consultation des offres",
-      "Dépôt de candidature en ligne",
-      "Sélection et contact"
-    ]
-  },
-
-"assistant_rules": {
-  "language": "fr",
-  "tone": "institutionnel, clair et professionnel",
-
-  "source_policy": "Répondre uniquement avec les informations issues du JSON et des API officielles Dakar Dem Dikk",
-
-  "fallback": "Cette information n'est pas disponible dans ma base de connaissances. Veuillez contacter Dakar Dem Dikk au +221 33 824 10 10 ou visiter https://demdikk.sn",
-
-  "api_priority": true,
-
-  "include_url": true,
-  "include_url_policy": "Toujours ajouter le lien officiel de la page source lorsque tu cites une information",
-
-  "response_format": [
-    "Titre clair",
-    "Réponse concise",
-    "Lien officiel"
-  ],
-
-  "format_response": "Structurer les réponses de manière claire avec les URLs pertinentes"
-},
-
-
-  "site": {
-    "name": "Dakar Demm Dikk",
-    "url": "https://demdikk.sn",
-    "description": "Opérateur public leader des transports terrestres au Sénégal et en Afrique de l'Ouest"
-  },
-  "faq": [
-    {
-      "question": "Qu'est-ce que Dakar Dem Dikk ?",
-      "answer": "Dakar Dem Dikk est une société anonyme de droit sénégalais à participation publique majoritaire (SAPPM) créée le 30 décembre 2000. Elle assure la mobilité urbaine et interurbaine des populations avec des bus modernes, accessibles et sécurisés.",
-      "url": "https://demdikk.sn/presentation/"
-    },
-    {
-      "question": "Quelle est la vision de Dakar Dem Dikk ?",
-      "answer": "Offrir un service public de transport moderne et adapté aux exigences de mobilité actuelles et futures.",
-      "url": "https://demdikk.sn/presentation/"
-    },
-    {
-      "question": "Quelle est la mission de Dakar Dem Dikk ?",
-      "answer": "Transporter les personnes et les biens partout au Sénégal et dans la sous-région avec des moyens sécuritaires.",
-      "url": "https://demdikk.sn/presentation/"
-    },
-    {
-      "question": "Quelles sont les valeurs de Dakar Dem Dikk ?",
-      "answer": "Dakar Dem Dikk garantit une mission de service public moderne multimodal dans le respect des valeurs d'équité, de professionnalisme et d'innovation.",
-      "url": "https://demdikk.sn/presentation/"
-    },
-    {
-      "question": "Comment contacter Dakar Dem Dikk ?",
-      "answer": "Vous pouvez contacter Dakar Dem Dikk par téléphone au +221 33 824 10 10 ou +221 33 865 15 55, par email à info@demdikk.sn ou contact@demdikk.sn. L'adresse est : Km 4,5 Avenue Cheikh Anta Diop, dépôt Ouakam, Dakar. Les horaires d'ouverture sont du lundi au vendredi de 08h à 17h.",
-      "url": "https://demdikk.sn/contact/"
-    },
-    {
-      "question": "Quels sont les horaires d'ouverture de Dakar Dem Dikk ?",
-      "answer": "Les bureaux de Dakar Dem Dikk sont ouverts du lundi au vendredi de 08h à 17h.",
-      "url": "https://demdikk.sn/contact/"
-    }
-  ],
-  "transport_offers": [
-    {
-      "type": "Dakar Dem Dikk - Transport Urbain",
-      "description": "Le Réseau de Transport de la Capitale assure le transport collectif dans la région de Dakar, laquelle compte environ 4 millions de personnes. 40 000 000 de voyageurs transportés par an, 4 000 000 de déplacements réguliers, 73 850 usagers en transport conventionnel.",
-      "url": "https://demdikk.sn/offres-de-transport/",
-      "details_url": "https://demdikk.sn/reseau-urbain-dakar/",
-      "features": [
-        "Bus confortables et connectés",
-        "Couverture de toute la région de Dakar",
-        "Réservation via téléphone, mail ou application mobile"
-      ]
-    },
-    {
-      "type": "Sénégal Dem Dikk - Transport Interurbain",
-      "description": "Le réseau Sénégal Dem Dikk participe à la vitalité des territoires avec 80 lignes interurbaines dans le pays, 2,5 millions de voyages annuels, et 95% des réseaux urbains opèrent des services de mobilité à la demande.",
-      "url": "https://demdikk.sn/offres-de-transport/",
-      "details_url": "https://demdikk.sn/reseau-interurbain/",
-      "features": [
-        "Liaisons régulières entre Dakar et les villes de l'intérieur",
-        "Bus tout confort",
-        "Service de mobilité à la demande"
-      ]
-    },
-    {
-      "type": "Afrique Dem Dikk - Transport International",
-      "description": "Voyagez vers Banjul à bord des bus Dem Dikk à seulement 12 000 F CFA. Service fiable et rapide vers plusieurs pays de l'Afrique de l'ouest au départ de Dakar.",
-      "url": "https://demdikk.sn/offres-de-transport/",
-      "routes": [
+    "faq": [
         {
-          "route": "Dakar - Banjul",
-          "departure": "Tous les jours à 7h",
-          "departure_point": "Terminus des Parcelles assainies",
-          "phone": "+221 77 589 36 27",
-          "price": "12 000 F CFA"
+            "question": "Qu'est-ce que Dakar Dem Dikk ?",
+            "answer": "Dakar Dem Dikk est une société anonyme de droit sénégalais à participation publique majoritaire (SAPPM) créée le 30 décembre 2000. Elle assure la mobility urbaine et interurbaine des populations avec des bus modernes, accessibles et sécurisés.",
+            "url": "https://demdikk.sn/presentation/"
         },
         {
-          "route": "Banjul - Dakar",
-          "departure": "Tous les jours à 7h30",
-          "departure_point": "Dépôt de GTSC Kanifing",
-          "phone": "+220 304 81 27"
+            "question": "Quelle est la vision de Dakar Dem Dikk ?",
+            "answer": "Offrir un service public de transport moderne et adapté aux exigences de mobilité actuelles et futures.",
+            "url": "https://demdikk.sn/presentation/"
+        },
+        {
+            "question": "Quelle est la mission de Dakar Dem Dikk ?",
+            "answer": "Transporter les personnes et les biens partout au Sénégal et dans la sous-région avec des moyens sécuritaires.",
+            "url": "https://demdikk.sn/presentation/"
+        },
+        {
+            "question": "Quelles sont les valeurs de Dakar Dem Dikk ?",
+            "answer": "Dakar Dem Dikk garantit une mission de service public moderne multimodal dans le respect des valeurs d'équité, de professionnalisme et d'innovation.",
+            "url": "https://demdikk.sn/presentation/"
+        },
+        {
+            "question": "Comment contacter Dakar Dem Dikk ?",
+            "answer": "Vous pouvez contacter Dakar Dem Dikk par téléphone au +221 33 824 10 10 ou +221 33 865 15 55, par email à info@demdikk.sn ou contact@demdikk.sn. L'adresse est : Km 4,5 Avenue Cheikh Anta Diop, dépôt Ouakam, Dakar. Les horaires d'ouverture sont du lundi au vendredi de 08h à 17h.",
+            "url": "https://demdikk.sn/contact/"
+        },
+        {
+            "question": "Quels sont les horaires d'ouverture de Dakar Dem Dikk ?",
+            "answer": "Les bureaux de Dakar Dem Dikk sont ouverts du lundi au vendredi de 08h à 17h.",
+            "url": "https://demdikk.sn/contact/"
         }
-      ]
-    },
-    {
-      "type": "Express AIBD - Navette Aéroport",
-      "description": "Service de navettes express pour rallier l'Aéroport International Blaise Diagne (AIBD) en toute sécurité. Les départs vers l'aéroport se font au terminus HLM Grand-Yoff en face du Stade Léopold Sédar Senghor, une heure avant votre convocation à l'Aéroport.",
-      "url": "https://demdikk.sn/offres-de-transport/",
-      "booking_url": "https://booking.demdikk.sn/reservation.php",
-      "features": [
-        "Service 24h/24 et 7j/7",
-        "Bus climatisés",
-        "Passage par l'autoroute à péage",
-        "Départs depuis l'AIBD une heure après l'atterrissage"
-      ],
-      "price": "6 000 FCFA aller simple",
-      "departure_point": "Terminus HLM Grand-Yoff (face Stade Léopold Sédar Senghor)",
-      "phone": "78 184 58 23 / 78 184 58 33 / 78 184 60 48"
-    }
-  ],
-  "services": [
-    {
-      "service": "Location de bus",
-      "description": "Dakar Dem Dikk met à disposition une flotte de véhicules avec conducteur pour tous vos besoins. Location d'une journée à plusieurs semaines, d'une dizaine à plusieurs centaines de passagers, au Sénégal comme dans la sous-région.",
-      "url": "https://demdikk.sn/services/",
-      "features": [
-        "Sécurité : véhicules soumis à un programme strict de maintenance",
-        "Expérience passager : confort des sièges, prises USB, écrans, climatisation",
-        "Suivi personnalisé : accompagnement de l'analyse du besoin jusqu'à la réalisation"
-      ],
-      "bus_types": [
-        "Bus Climatisé 37 Places",
-        "Bus Climatisé 49 Places",
-        "Bus climatisé 55 Places",
-        "Bus Non Climatisé 20 Places",
-        "Bus Non Climatisé 28 Places",
-        "Bus Non Climatisé 44 Places",
-        "Bus Non Climatisé 66 Places"
-      ],
-      "payment_methods": [
-        "Mobile Money",
-        "Cash",
-        "Virement bancaire"
-      ]
-    },
-    {
-      "service": "Abonnement",
-      "description": "Cartes d'abonnement pour permettre à chacun de se déplacer facilement. Une expérience au-delà du parcours avec les cartes d'abonnement Dem Dikk.",
-      "url": "https://demdikk.sn/services/"
-    },
-    {
-      "service": "Publicité / Régie publicitaire",
-      "description": "Offre complète d'espaces publicitaires pour renforcer votre présence et visibilité dans la capitale et dans les régions. Boostez votre visibilité via le réseau de bus DEM DIKK et la régie digitale.",
-      "url": "https://demdikk.sn/services/",
-      "offers": {
-        "regie_classique": [
-          "Publicité sur titre de voyage",
-          "Affichage sur bus",
-          "Full branding de bus",
-          "Dos de sièges",
-          "Voussoirs"
+    ],
+    "transport_offers": [
+        {
+            "type": "Dakar Dem Dikk - Transport Urbain",
+            "description": "Le Réseau de Transport de la Capitale assure le transport collectif dans la région de Dakar, laquelle compte environ 4 millions de personnes. 40 000 000 de voyageurs transportés par an, 4 000 000 de déplacements réguliers, 73 850 usagers en transport conventionnel.",
+            "url": "https://demdikk.sn/offres-de-transport/",
+            "details_url": "https://demdikk.sn/reseau-urbain-dakar/",
+            "features": [
+                "Bus confortables et connectés",
+                "Couverture de toute la région de Dakar",
+                "Réservation via téléphone, mail ou application mobile"
+            ]
+        },
+        {
+            "type": "Sénégal Dem Dikk - Transport Interurbain",
+            "description": "Le réseau Sénégal Dem Dikk participe à la vitalité des territoires avec 80 lignes interurbaines dans le pays, 2,5 millions de voyages annuels, et 95% des réseaux urbains opèrent des services de mobilité à la demande.",
+            "url": "https://demdikk.sn/offres-de-transport/",
+            "details_url": "https://demdikk.sn/reseau-interurbain/",
+            "features": [
+                "Liaisons régulières entre Dakar et les villes de l'intérieur",
+                "Bus tout confort",
+                "Service de mobilité à la demande"
+            ]
+        },
+        {
+            "type": "Afrique Dem Dikk - Transport International",
+            "description": "Voyagez vers Banjul à bord des bus Dem Dikk à seulement 12 000 F CFA. Service fiable et rapide vers plusieurs pays de l'Afrique de l'ouest au départ de Dakar.",
+            "url": "https://demdikk.sn/offres-de-transport/",
+            "routes": [
+                {
+                    "route": "Dakar - Banjul",
+                    "departure": "Tous les jours à 7h",
+                    "departure_point": "Terminus des Parcelles assainies",
+                    "phone": "+221 77 589 36 27",
+                    "price": "12 000 F CFA"
+                },
+                {
+                    "route": "Banjul - Dakar",
+                    "departure": "Tous les jours à 7h30",
+                    "departure_point": "Dépôt de GTSC Kanifing",
+                    "phone": "+220 304 81 27"
+                }
+            ]
+        },
+        {
+            "type": "Express AIBD - Navette Aéroport",
+            "description": "Service de navettes express pour rallier l'Aéroport International Blaise Diagne (AIBD) en toute sécurité. Les départs vers l'aéroport se font au terminus HLM Grand-Yoff en face du Stade Léopold Sédar Senghor, une heure avant votre convocation à l'Aéroport.",
+            "url": "https://demdikk.sn/offres-de-transport/",
+            "booking_url": "https://booking.demdikk.sn/reservation.php",
+            "features": [
+                "Service 24h/24 et 7j/7",
+                "Bus climatisés",
+                "Passage par l'autoroute à péage",
+                "Départs depuis l'AIBD une heure après l'atterrissage"
+            ],
+            "price": "6 000 FCFA aller simple",
+            "departure_point": "Terminus HLM Grand-Yoff (face Stade Léopold Sédar Senghor)",
+            "phone": "78 184 58 23 / 78 184 58 33 / 78 184 60 48"
+        }
+    ],
+    "services": [
+        {
+            "service": "Location de bus",
+            "description": "Dakar Dem Dikk met à disposition une flotte de véhicules avec conducteur pour tous vos besoins. Location d'une journée à plusieurs semaines, d'une dizaine à plusieurs centaines de passagers, au Sénégal comme dans la sous-région.",
+            "url": "https://demdikk.sn/services/",
+            "features": [
+                "Sécurité : véhicules soumis à un programme strict de maintenance",
+                "Expérience passager : confort des sièges, prises USB, écrans, climatisation",
+                "Suivi personnalisé : accompagnement de l'analyse du besoin jusqu'à la réalisation"
+            ],
+            "bus_types": [
+                "Bus Climatisé 37 Places",
+                "Bus Climatisé 49 Places",
+                "Bus climatisé 55 Places",
+                "Bus Non Climatisé 20 Places",
+                "Bus Non Climatisé 28 Places",
+                "Bus Non Climatisé 44 Places",
+                "Bus Non Climatisé 66 Places"
+            ],
+            "payment_methods": [
+                "Mobile Money",
+                "Cash",
+                "Virement bancaire"
+            ]
+        },
+        {
+            "service": "Abonnement",
+            "description": "Cartes d'abonnement pour permettre à chacun de se déplacer facilement. Une expérience au-delà du parcours avec les cartes d'abonnement Dem Dikk.",
+            "url": "https://demdikk.sn/services/"
+        },
+        {
+            "service": "Publicité / Régie publicitaire",
+            "description": "Offre complète d'espaces publicitaires pour renforcer votre présence et visibilité dans la capitale et dans les régions. Boostez votre visibilité via le réseau de bus DEM DIKK et la régie digitale.",
+            "url": "https://demdikk.sn/services/",
+            "offers": {
+                "regie_classique": [
+                    "Publicité sur titre de voyage",
+                    "Affichage sur bus",
+                    "Full branding de bus",
+                    "Dos de sièges",
+                    "Voussoirs"
+                ],
+                "regie_digitale": [
+                    "Affichage sur écran dynamique",
+                    "Affichage sur abribus",
+                    "Écran embarqué"
+                ],
+                "publicite_native": [
+                    "Publicité sur application mobile",
+                    "Publicité sur portail WIFI à bord"
+                ]
+            }
+        },
+        {
+            "service": "Messagerie / Transport de colis",
+            "description": "Service de livraison qui s'appuie sur le réseau de transport interurbain 'Sénégal Dem Dikk' pour expédier vos colis ou marchandises partout au Sénégal en toute sécurité. Livraison en 24h.",
+            "url": "https://demdikk.sn/services/",
+            "coverage": "Totalité du territoire National et International",
+            "types": "Cold & Dry",
+            "produits_non_acceptes": [
+                "Chèques",
+                "Produits périssables",
+                "Téléphones portables, tablettes, ordinateurs",
+                "Gaz liquide inflammable",
+                "Armes à feu et objets tranchants"
+            ]
+        },
+        {
+            "service": "Mécanique & Entretien",
+            "description": "Expertise pour entretenir votre automobile et camion léger. Réparations en mécanique américaine, asiatique et européenne.",
+            "url": "https://demdikk.sn/services/",
+            "prestations": [
+                "Interventions moteur et boîte de vitesse",
+                "Entretien climatisation auto",
+                "Révision, vidange, filtration",
+                "Géométrie, parallélisme",
+                "Batterie, éclairage",
+                "Freinage",
+                "Pneumatique",
+                "Entretien de flotte de véhicules",
+                "Plan d'entretien"
+            ]
+        },
+        {
+            "service": "Réclamations & Formulaires",
+            "description": "Formulaires pour devis, réclamations et signalements disponibles sur le site.",
+            "url": "https://demdikk.sn/services/",
+            "motifs_reclamation": [
+                "Refus de vente de ticket",
+                "Comportement agressif Receveur",
+                "Entorse au code de la route",
+                "Refus de rendre la monnaie",
+                "Débarquement forcé",
+                "Comportement agressif Conducteur",
+                "Autre"
+            ]
+        }
+    ],
+    "info_voyageurs": {
+        "description": "Informations pour les voyageurs permettant de préparer leurs déplacements : horaires, conseils, règles à bord des bus, recommandations et points de départ/terminus.",
+        "url": "https://demdikk.sn/info-voyageurs/",
+        "sections": [
+            "Lignes de Dakar Dem Dikk",
+            "Dessertes Gares du TER",
+            "Lignes Urbaines",
+            "Lignes Banlieue",
+            "Lignes TAF TAF",
+            "Gares Sénégal Dem Dikk"
         ],
-        "regie_digitale": [
-          "Affichage sur écran dynamique",
-          "Affichage sur abribus",
-          "Écran embarqué"
+        "gares": [
+            {
+                "nom": "Gare de Dieuppeul",
+                "description": "Voyagez partout à l'intérieur du Sénégal depuis la gare de Dieuppeul",
+                "phone": "+221 77 589 36 23"
+            },
+            {
+                "nom": "Gare de Colobane",
+                "description": "Voyagez vers Thiès depuis la gare de Colobane",
+                "phone": "+221 77 371 62 73"
+            },
+            {
+                "nom": "Gare Parcelles Assainies",
+                "description": "Voyagez à l'intérieur du Sénégal depuis la gare des Parcelles",
+                "phone": "+221 77 589 36 27"
+            },
+            {
+                "nom": "Gare HLM Grand Yoff",
+                "description": "Voyagez entre l'aéroport et le centre ville à bord des bus Express",
+                "phone": "78 184 58 23 / 78 184 58 33 / 78 184 60 48"
+            }
         ],
-        "publicite_native": [
-          "Publicité sur application mobile",
-          "Publicité sur portail WIFI à bord"
+        "engagement": "Nous assurons sur tout le territoire sénégalais, la mobilité de personnes et de biens par des systèmes de transport efficaces et sécurisés.",
+        "features": [
+            "Un service aligné aux normes internationales",
+            "Une couverture nationale et internationale",
+            "Une expérience de voyage immersive"
         ]
-      }
     },
-    {
-      "service": "Messagerie / Transport de colis",
-      "description": "Service de livraison qui s'appuie sur le réseau de transport interurbain 'Sénégal Dem Dikk' pour expédier vos colis ou marchandises partout au Sénégal en toute sécurité. Livraison en 24h.",
-      "url": "https://demdikk.sn/services/",
-      "coverage": "Totalité du territoire National et International",
-      "types": "Cold & Dry",
-      "produits_non_acceptes": [
-        "Chèques",
-        "Produits périssables",
-        "Téléphones portables, tablettes, ordinateurs",
-        "Gaz liquide inflammable",
-        "Armes à feu et objets tranchants"
-      ]
+    "presentation": {
+        "url": "https://demdikk.sn/presentation/",
+        "creation": "30 Décembre 2000",
+        "debut_activites": "Janvier 2001",
+        "forme_juridique": "Société anonyme de droit sénégalais à participation publique majoritaire (SAPPM)",
+        "capital_social": "1 500 000 000 FCFA",
+        "actionnariat": {
+            "etat_senegal": "76.66%",
+            "gie_and_liguey_diarignou": "13.33%",
+            "cnart_assurances": "3.33%",
+            "senecartours": "3.33%",
+            "gie_solidarite": "3.33%"
+        },
+        "statistiques": {
+            "kilometres_par_jour": "20 000 km en moyenne",
+            "voyageurs_par_jour": "40 000 voyageurs en moyenne"
+        },
+        "projets": {
+            "description": "Acquisition de 1 400 bus de marque Iveco",
+            "objectifs": [
+                "Densification du réseau urbain actuel",
+                "Présence sur l'étendue du territoire national en interconnectant les grandes villes",
+                "Ouverture de lignes dans la sous-région"
+            ]
+        },
+        "historique": [
+            {
+                "date": "02 janvier 2001 - 1er février 2017",
+                "evenement": "Exploitation limitée à Dakar et sa banlieue"
+            },
+            {
+                "date": "2016",
+                "evenement": "Arrivée de 475 bus Ashock Leyland, création de nouvelles lignes urbaines"
+            },
+            {
+                "date": "1er février 2017",
+                "evenement": "Lancement de 'Sénégal Dem Dikk' - liaisons régulières entre Dakar et les villes de l'intérieur"
+            },
+            {
+                "date": "07 décembre 2017",
+                "evenement": "Lancement des navettes Express AIBD"
+            },
+            {
+                "date": "23 janvier 2020",
+                "evenement": "Lancement de 'Afrique Dem Dikk' - transport international"
+            }
+        ]
     },
-    {
-      "service": "Mécanique & Entretien",
-      "description": "Expertise pour entretenir votre automobile et camion léger. Réparations en mécanique américaine, asiatique et européenne.",
-      "url": "https://demdikk.sn/services/",
-      "prestations": [
-        "Interventions moteur et boîte de vitesse",
-        "Entretien climatisation auto",
-        "Révision, vidange, filtration",
-        "Géométrie, parallélisme",
-        "Batterie, éclairage",
-        "Freinage",
-        "Pneumatique",
-        "Entretien de flotte de véhicules",
-        "Plan d'entretien"
-      ]
+    "contact": {
+        "url": "https://demdikk.sn/contact/",
+        "adresse": "Km 4,5 Avenue Cheikh Anta Diop, dépôt Ouakam, Dakar, Sénégal",
+        "telephones": [
+            "+221 33 824 10 10",
+            "+221 33 865 15 55"
+        ],
+        "emails": [
+            "info@demdikk.sn",
+            "contact@demdikk.sn"
+        ],
+        "horaires": "Lundi - Vendredi (08h - 17h)"
     },
-    {
-      "service": "Réclamations & Formulaires",
-      "description": "Formulaires pour devis, réclamations et signalements disponibles sur le site.",
-      "url": "https://demdikk.sn/services/",
-      "motifs_reclamation": [
-        "Refus de vente de ticket",
-        "Comportement agressif Receveur",
-        "Entorse au code de la route",
-        "Refus de rendre la monnaie",
-        "Débarquement forcé",
-        "Comportement agressif Conducteur",
-        "Autre"
-      ]
+    "liens_utiles": [
+        {
+            "nom": "Ministère des Transports Terrestres et Aériens",
+            "url": "https://www.mittd.gouv.sn/"
+        },
+        {
+            "nom": "Ministère des Finances et du Budget",
+            "url": "http://www.finances.gouv.sn/"
+        },
+        {
+            "nom": "Conseil exécutif des Transports urbains Durables (CETUD)",
+            "url": "https://www.cetud.sn/"
+        }
+    ],
+    "emplois": {
+        "description": "Dakar Dem Dikk publie régulièrement des offres d'emplois pour renforcer son personnel administratif et technique.",
+        "url": "https://jobs.demdikk.sn/nos-offres/"
+    },
+    "lignes_urbaines": {
+        "description": "Lignes de bus urbaines dans la région de Dakar",
+        "url": "https://demdikk.sn/reseau-urbain-dakar/",
+        "lignes": [
+            {
+                "numero": "1",
+                "trajet": "PARCELLES ASSAINIES <--> PLACE LECLERC"
+            },
+            {
+                "numero": "2",
+                "trajet": "DAROUKHANE <--> PLACE LECLERC"
+            },
+            {
+                "numero": "4",
+                "trajet": "LIBERTÉ 5 <--> PLACE LECLERC"
+            },
+            {
+                "numero": "5",
+                "trajet": "GUÉDIAWAYE <--> PALAIS 1"
+            },
+            {
+                "numero": "6",
+                "trajet": "GUÉDIAWAYE <--> PALAIS 1"
+            },
+            {
+                "numero": "7",
+                "trajet": "OUAKAM <--> PALAIS 2"
+            },
+            {
+                "numero": "8",
+                "trajet": "AEROPORT LSS <--> PALAIS 2"
+            },
+            {
+                "numero": "9",
+                "trajet": "LIBERTÉ 6 <--> PALAIS 2"
+            },
+            {
+                "numero": "10",
+                "trajet": "LIBERTÉ 5 <--> PALAIS 2"
+            },
+            {
+                "numero": "11",
+                "trajet": "KEUR MASSAR <--> LAT DIOR"
+            },
+            {
+                "numero": "12",
+                "trajet": "GUÉDIAWAYE <--> PALAIS 1"
+            },
+            {
+                "numero": "13",
+                "trajet": "LIBERTÉ 5 <--> PALAIS 2"
+            },
+            {
+                "numero": "15",
+                "trajet": "RUFISQUE <--> PALAIS 1"
+            },
+            {
+                "numero": "16A",
+                "trajet": "MALIKA <--> PALAIS 1"
+            },
+            {
+                "numero": "16B",
+                "trajet": "MALIKA <--> PALAIS 1"
+            },
+            {
+                "numero": "18",
+                "trajet": "DIEUPPEUL <--> CENTRE-VILLE"
+            },
+            {
+                "numero": "20",
+                "trajet": "DIEUPPEUL <--> CENTRE-VILLE"
+            },
+            {
+                "numero": "23",
+                "trajet": "PARCELLES ASSAINIES <--> PALAIS 1"
+            },
+            {
+                "numero": "121",
+                "trajet": "SCAT URBAM <--> LECLERC"
+            },
+            {
+                "numero": "208",
+                "trajet": "BAYAKH <--> RUFISQUE"
+            },
+            {
+                "numero": "213",
+                "trajet": "RUFISQUE <--> DIEUPPEUL"
+            },
+            {
+                "numero": "217",
+                "trajet": "THIAROYE <--> OUAKAM"
+            },
+            {
+                "numero": "218",
+                "trajet": "THIAROYE <--> AÉROPORT LSS"
+            },
+            {
+                "numero": "219",
+                "trajet": "DAROUKHANE <--> OUAKAM"
+            },
+            {
+                "numero": "220",
+                "trajet": "RUFISQUE <--> GUÉDIAWAYE"
+            },
+            {
+                "numero": "221",
+                "trajet": "GADAYE <--> ALMADIES"
+            },
+            {
+                "numero": "227",
+                "trajet": "KEUR MASSAR <--> TERMINUS PARCELLES"
+            },
+            {
+                "numero": "231",
+                "trajet": "TERMINUS RUFISQUE <--> YENNE"
+            },
+            {
+                "numero": "232",
+                "trajet": "BAUX MARAICHERS <--> AEROPORT LSS"
+            },
+            {
+                "numero": "233",
+                "trajet": "BAUX MARAICHERS <--> PALAIS 1"
+            },
+            {
+                "numero": "234",
+                "trajet": "JAXAAY <--> LECLERC"
+            },
+            {
+                "numero": "311",
+                "trajet": "LAC ROSE <--> CROISSEMENT KEUR MASSAR"
+            },
+            {
+                "numero": "319",
+                "trajet": "LIBERTÉ 6 <--> OUAKAM"
+            },
+            {
+                "numero": "327",
+                "trajet": "KEUR MASSAR <--> TERMINUS PARCELLES"
+            },
+            {
+                "numero": "501",
+                "trajet": "PALAIS 2 <--> LECLERC"
+            },
+            {
+                "numero": "502",
+                "trajet": "Dessertes Gares du TER"
+            },
+            {
+                "numero": "503",
+                "trajet": "Dessertes Gares du TER"
+            },
+            {
+                "numero": "TAF TAF TO1",
+                "trajet": "OUAKAM <--> PALAIS 2"
+            }
+        ]
+    },
+    "lignes_interurbaines": {
+        "description": "Lignes de bus interurbaines reliant Dakar aux principales villes du Sénégal",
+        "url": "https://demdikk.sn/reseau-interurbain/",
+        "destinations": [
+            {
+                "ville": "Thiès",
+                "prix": "2 000 FCFA",
+                "horaires": "Dakar vers Thiès: 7h à 19h | Thiès vers Dakar: 6h à 19h",
+                "depart_dakar": "Gare de Colobane",
+                "depart_ville": "Grand Standing derrière station EDK OIL",
+                "frequence": "Tous les jours",
+                "phone": "+221 77 371 62 73"
+            },
+            {
+                "ville": "Mbour",
+                "prix": "2 500 FCFA",
+                "horaires": "Dakar: 8h et 16h | Mbour vers Dakar: 7h à 16h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Route nationale en face terrain Akhmadou Barro",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 12"
+            },
+            {
+                "ville": "Tivaouane",
+                "prix": "2 500 FCFA",
+                "horaires": "Tivaouane: 7h (sauf Vendredi: 7h et 17h30) | Dakar: Vendredi 10h et 17h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier El Malick SY 2, route de Ndiassane à côté du Lycée Ababacar SY",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 05"
+            },
+            {
+                "ville": "Fatick",
+                "prix": "3 000 FCFA",
+                "horaires": "7h et 15h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Boulevard en face keur Macky Sall",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 07"
+            },
+            {
+                "ville": "Diourbel",
+                "prix": "3 000 FCFA",
+                "horaires": "7h et 15h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier Cheikh Anta",
+                "frequence": "Tous les jours",
+                "phone": "+221 77 848 02 36"
+            },
+            {
+                "ville": "Kébémer",
+                "prix": "3 000 FCFA",
+                "horaires": "7h et 15h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Louga - Quartier Santhiaba Sud",
+                "frequence": "Tous les jours",
+                "phone": "+221 77 848 02 40"
+            },
+            {
+                "ville": "Louga",
+                "prix": "4 000 FCFA",
+                "horaires": "7h et 15h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier Santhiaba Sud, Route menant à la Gouvernance",
+                "frequence": "Tous les jours",
+                "phone": "+221 77 848 02 40"
+            },
+            {
+                "ville": "Touba",
+                "prix": "4 000 FCFA",
+                "horaires": "7h et 15h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "28 Pharmacie Sérigne Fallou Mbacké",
+                "frequence": "Tous les jours sauf Mercredi",
+                "phone": "+221 78 620 04 06"
+            },
+            {
+                "ville": "Kaolack",
+                "prix": "4 000 FCFA",
+                "horaires": "7h et 15h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier Casa ville en face gneti gouy",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 08"
+            },
+            {
+                "ville": "Kaffrine",
+                "prix": "5 000 FCFA",
+                "horaires": "Dakar: 7h (Lundi, Mercredi, Vendredi) | Kaffrine: 7h (Mardi, Jeudi, Samedi)",
+                "depart_dakar": "HLM Grand Yoff",
+                "depart_ville": "Cité Millionnaire (NDJIGUI 2)",
+                "frequence": "3 fois par semaine",
+                "phone": "+221 77 589 36 28"
+            },
+            {
+                "ville": "Saint-Louis",
+                "prix": "5 000 FCFA",
+                "horaires": "Dakar: 7h et 14h | Saint-Louis: 7h et 14h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Pikine Guinaw rail derrière la station OIL LYBIA",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 01"
+            },
+            {
+                "ville": "Bignona",
+                "prix": "8 000 FCFA",
+                "horaires": "Dakar: 8h | Bignona: 8h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Près du camp sapeur sur la piste en allant vers le stade",
+                "frequence": "Tous les jours",
+                "phone": "+221 77 846 02 93"
+            },
+            {
+                "ville": "Podor",
+                "prix": "8 000 FCFA",
+                "horaires": "Dakar: 7h | Podor: 6h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Lao demba ancien eno près du stade municipale alassane wade",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 02"
+            },
+            {
+                "ville": "Ndioum",
+                "prix": "8 000 FCFA",
+                "horaires": "Dakar: 7h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier Nianga, immeuble Harouna Dia Mélou",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 03"
+            },
+            {
+                "ville": "Tambacounda",
+                "prix": "9 000 FCFA",
+                "horaires": "Dakar: 7h (tous les jours) | Tambacounda: 8h30 (tous les jours sauf Jeudi)",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Médina Coura en face église Jean XXIII",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 11"
+            },
+            {
+                "ville": "Ziguinchor",
+                "prix": "9 000 FCFA",
+                "horaires": "Dakar: 8h | Ziguinchor: 7h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier Néma, Av. Emile Badiane, enface de la DRDR",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 09"
+            },
+            {
+                "ville": "Kolda",
+                "prix": "9 000 FCFA",
+                "horaires": "Dakar: 8h | Kolda: 7h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Derrière le stade régional près du pharmacie Tamarassy",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 620 04 10"
+            },
+            {
+                "ville": "Sédhiou",
+                "prix": "9 000 FCFA",
+                "horaires": "Dakar: 8h | Sédhiou: 7h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier Santassou",
+                "frequence": "Lundi, Mercredi et Samedi",
+                "phone": "+221 78 460 43 36"
+            },
+            {
+                "ville": "Ourossogui / Matam",
+                "prix": "10 000 FCFA",
+                "horaires": "Dakar: 8h | Matam: 6h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier Moderne 1 derrière hotel OASIS",
+                "frequence": "Lundi, Jeudi et Samedi",
+                "phone": "+221 78 620 04 04"
+            },
+            {
+                "ville": "Vélingara",
+                "prix": "11 000 FCFA",
+                "horaires": "Dakar: 8h | Vélingara: 7h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier HLM en face Station Elton",
+                "frequence": "Tous les jours",
+                "phone": "+221 78 460 43 37"
+            },
+            {
+                "ville": "Kédougou",
+                "prix": "12 000 FCFA",
+                "horaires": "Dakar: 7h | Kédougou: 7h",
+                "depart_dakar": "Terminus Liberté 5",
+                "depart_ville": "Quartier Gomba Villa 172",
+                "frequence": "Tous les jours",
+                "phone": "+221 77 385 32 61"
+            },
+            {
+                "ville": "Bakel",
+                "prix": "12 000 FCFA",
+                "horaires": "7h",
+                "depart_dakar": "HLM Grand Yoff",
+                "depart_ville": "HLM Bakel, coté CNCA",
+                "frequence": "Mardi, Vendredi, Dimanche",
+                "phone": "+221 78 184 58 88"
+            },
+            {
+                "ville": "Kidira",
+                "prix": "13 000 FCFA",
+                "horaires": "7h",
+                "depart_dakar": "Terminus HLM Grand Yoff",
+                "depart_ville": "Quartier Plateau, en face ancienne gare ferroviaire",
+                "frequence": "Lundi, Mercredi et Samedi",
+                "phone": "+221 33 824 10 10"
+            }
+        ]
+    },
+    "tarifs": {
+        "description": "Tarifs des services de transport Dakar Dem Dikk",
+        "url": "https://demdikk.sn/services/",
+        "bus_urbains": {
+            "ticket_simple": {
+                "prix": "150 FCFA",
+                "description": "Ticket valable pour un trajet simple sur les lignes urbaines de Dakar",
+                "validite": "Un trajet"
+            },
+            "abonnements": {
+                "description": "Cartes d'abonnement pour se déplacer facilement",
+                "url": "https://demdikk.sn/services/",
+                "types": [
+                    {
+                        "type": "Abonnement mensuel",
+                        "description": "Accès illimité pendant un mois sur toutes les lignes urbaines"
+                    },
+                    {
+                        "type": "Abonnement hebdomadaire",
+                        "description": "Accès illimité pendant une semaine sur toutes les lignes urbaines"
+                    }
+                ],
+                "note": "Pour plus d'informations sur les tarifs d'abonnement, veuillez contacter le +221 33 824 10 10"
+            }
+        },
+        "navette_aeroport": {
+            "prix": "6 000 FCFA",
+            "description": "Navette Express AIBD - Aller simple",
+            "url": "https://booking.demdikk.sn/reservation.php"
+        },
+        "lignes_interurbaines": {
+            "description": "Voir la section 'lignes_interurbaines' pour les tarifs détaillés par destination",
+            "prix_min": "2 000 FCFA",
+            "prix_max": "13 000 FCFA"
+        }
     }
-  ],
-  "info_voyageurs": {
-    "description": "Informations pour les voyageurs permettant de préparer leurs déplacements : horaires, conseils, règles à bord des bus, recommandations et points de départ/terminus.",
-    "url": "https://demdikk.sn/info-voyageurs/",
-    "sections": [
-      "Lignes de Dakar Dem Dikk",
-      "Dessertes Gares du TER",
-      "Lignes Urbaines",
-      "Lignes Banlieue",
-      "Lignes TAF TAF",
-      "Gares Sénégal Dem Dikk"
-    ],
-    "gares": [
-      {
-        "nom": "Gare de Dieuppeul",
-        "description": "Voyagez partout à l'intérieur du Sénégal depuis la gare de Dieuppeul",
-        "phone": "+221 77 589 36 23"
-      },
-      {
-        "nom": "Gare de Colobane",
-        "description": "Voyagez vers Thiès depuis la gare de Colobane",
-        "phone": "+221 77 371 62 73"
-      },
-      {
-        "nom": "Gare Parcelles Assainies",
-        "description": "Voyagez à l'intérieur du Sénégal depuis la gare des Parcelles",
-        "phone": "+221 77 589 36 27"
-      },
-      {
-        "nom": "Gare HLM Grand Yoff",
-        "description": "Voyagez entre l'aéroport et le centre ville à bord des bus Express",
-        "phone": "78 184 58 23 / 78 184 58 33 / 78 184 60 48"
-      }
-    ],
-    "engagement": "Nous assurons sur tout le territoire sénégalais, la mobilité de personnes et de biens par des systèmes de transport efficaces et sécurisés.",
-    "features": [
-      "Un service aligné aux normes internationales",
-      "Une couverture nationale et internationale",
-      "Une expérience de voyage immersive"
-    ]
-  },
-  "presentation": {
-    "url": "https://demdikk.sn/presentation/",
-    "creation": "30 Décembre 2000",
-    "debut_activites": "Janvier 2001",
-    "forme_juridique": "Société anonyme de droit sénégalais à participation publique majoritaire (SAPPM)",
-    "capital_social": "1 500 000 000 FCFA",
-    "actionnariat": {
-      "etat_senegal": "76.66%",
-      "gie_and_liguey_diarignou": "13.33%",
-      "cnart_assurances": "3.33%",
-      "senecartours": "3.33%",
-      "gie_solidarite": "3.33%"
-    },
-    "statistiques": {
-      "kilometres_par_jour": "20 000 km en moyenne",
-      "voyageurs_par_jour": "40 000 voyageurs en moyenne"
-    },
-    "projets": {
-      "description": "Acquisition de 1 400 bus de marque Iveco",
-      "objectifs": [
-        "Densification du réseau urbain actuel",
-        "Présence sur l'étendue du territoire national en interconnectant les grandes villes",
-        "Ouverture de lignes dans la sous-région"
-      ]
-    },
-    "historique": [
-      {
-        "date": "02 janvier 2001 - 1er février 2017",
-        "evenement": "Exploitation limitée à Dakar et sa banlieue"
-      },
-      {
-        "date": "2016",
-        "evenement": "Arrivée de 475 bus Ashock Leyland, création de nouvelles lignes urbaines"
-      },
-      {
-        "date": "1er février 2017",
-        "evenement": "Lancement de 'Sénégal Dem Dikk' - liaisons régulières entre Dakar et les villes de l'intérieur"
-      },
-      {
-        "date": "07 décembre 2017",
-        "evenement": "Lancement des navettes Express AIBD"
-      },
-      {
-        "date": "23 janvier 2020",
-        "evenement": "Lancement de 'Afrique Dem Dikk' - transport international"
-      }
-    ]
-  },
-  "contact": {
-    "url": "https://demdikk.sn/contact/",
-    "adresse": "Km 4,5 Avenue Cheikh Anta Diop, dépôt Ouakam, Dakar, Sénégal",
-    "telephones": [
-      "+221 33 824 10 10",
-      "+221 33 865 15 55"
-    ],
-    "emails": [
-      "info@demdikk.sn",
-      "contact@demdikk.sn"
-    ],
-    "horaires": "Lundi - Vendredi (08h - 17h)"
-  },
-  "liens_utiles": [
-    {
-      "nom": "Ministère des Transports Terrestres et Aériens",
-      "url": "https://www.mittd.gouv.sn/"
-    },
-    {
-      "nom": "Ministère des Finances et du Budget",
-      "url": "http://www.finances.gouv.sn/"
-    },
-    {
-      "nom": "Conseil exécutif des Transports urbains Durables (CETUD)",
-      "url": "https://www.cetud.sn/"
-    }
-  ],
-  "emplois": {
-    "description": "Dakar Dem Dikk publie régulièrement des offres d'emplois pour renforcer son personnel administratif et technique.",
-    "url": "https://jobs.demdikk.sn/nos-offres/"
-  },
-  "lignes_urbaines": {
-    "description": "Lignes de bus urbaines dans la région de Dakar",
-    "url": "https://demdikk.sn/reseau-urbain-dakar/",
-    "lignes": [
-      {
-        "numero": "1",
-        "trajet": "PARCELLES ASSAINIES <--> PLACE LECLERC"
-      },
-      {
-        "numero": "2",
-        "trajet": "DAROUKHANE <--> PLACE LECLERC"
-      },
-      {
-        "numero": "4",
-        "trajet": "LIBERTÉ 5 <--> PLACE LECLERC"
-      },
-      {
-        "numero": "5",
-        "trajet": "GUÉDIAWAYE <--> PALAIS 1"
-      },
-      {
-        "numero": "6",
-        "trajet": "GUÉDIAWAYE <--> PALAIS 1"
-      },
-      {
-        "numero": "7",
-        "trajet": "OUAKAM <--> PALAIS 2"
-      },
-      {
-        "numero": "8",
-        "trajet": "AEROPORT LSS <--> PALAIS 2"
-      },
-      {
-        "numero": "9",
-        "trajet": "LIBERTÉ 6 <--> PALAIS 2"
-      },
-      {
-        "numero": "10",
-        "trajet": "LIBERTÉ 5 <--> PALAIS 2"
-      },
-      {
-        "numero": "11",
-        "trajet": "KEUR MASSAR <--> LAT DIOR"
-      },
-      {
-        "numero": "12",
-        "trajet": "GUÉDIAWAYE <--> PALAIS 1"
-      },
-      {
-        "numero": "13",
-        "trajet": "LIBERTÉ 5 <--> PALAIS 2"
-      },
-      {
-        "numero": "15",
-        "trajet": "RUFISQUE <--> PALAIS 1"
-      },
-      {
-        "numero": "16A",
-        "trajet": "MALIKA <--> PALAIS 1"
-      },
-      {
-        "numero": "16B",
-        "trajet": "MALIKA <--> PALAIS 1"
-      },
-      {
-        "numero": "18",
-        "trajet": "DIEUPPEUL <--> CENTRE-VILLE"
-      },
-      {
-        "numero": "20",
-        "trajet": "DIEUPPEUL <--> CENTRE-VILLE"
-      },
-      {
-        "numero": "23",
-        "trajet": "PARCELLES ASSAINIES <--> PALAIS 1"
-      },
-      {
-        "numero": "121",
-        "trajet": "SCAT URBAM <--> LECLERC"
-      },
-      {
-        "numero": "208",
-        "trajet": "BAYAKH <--> RUFISQUE"
-      },
-      {
-        "numero": "213",
-        "trajet": "RUFISQUE <--> DIEUPPEUL"
-      },
-      {
-        "numero": "217",
-        "trajet": "THIAROYE <--> OUAKAM"
-      },
-      {
-        "numero": "218",
-        "trajet": "THIAROYE <--> AÉROPORT LSS"
-      },
-      {
-        "numero": "219",
-        "trajet": "DAROUKHANE <--> OUAKAM"
-      },
-      {
-        "numero": "220",
-        "trajet": "RUFISQUE <--> GUÉDIAWAYE"
-      },
-      {
-        "numero": "221",
-        "trajet": "GADAYE <--> ALMADIES"
-      },
-      {
-        "numero": "227",
-        "trajet": "KEUR MASSAR <--> TERMINUS PARCELLES"
-      },
-      {
-        "numero": "231",
-        "trajet": "TERMINUS RUFISQUE <--> YENNE"
-      },
-      {
-        "numero": "232",
-        "trajet": "BAUX MARAICHERS <--> AEROPORT LSS"
-      },
-      {
-        "numero": "233",
-        "trajet": "BAUX MARAICHERS <--> PALAIS 1"
-      },
-      {
-        "numero": "234",
-        "trajet": "JAXAAY <--> LECLERC"
-      },
-      {
-        "numero": "311",
-        "trajet": "LAC ROSE <--> CROISSEMENT KEUR MASSAR"
-      },
-      {
-        "numero": "319",
-        "trajet": "LIBERTÉ 6 <--> OUAKAM"
-      },
-      {
-        "numero": "327",
-        "trajet": "KEUR MASSAR <--> TERMINUS PARCELLES"
-      },
-      {
-        "numero": "501",
-        "trajet": "PALAIS 2 <--> LECLERC"
-      },
-      {
-        "numero": "502",
-        "trajet": "Dessertes Gares du TER"
-      },
-      {
-        "numero": "503",
-        "trajet": "Dessertes Gares du TER"
-      },
-      {
-        "numero": "TAF TAF TO1",
-        "trajet": "OUAKAM <--> PALAIS 2"
-      }
-    ]
-  },
-  "lignes_interurbaines": {
-    "description": "Lignes de bus interurbaines reliant Dakar aux principales villes du Sénégal",
-    "url": "https://demdikk.sn/reseau-interurbain/",
-    "destinations": [
-      {
-        "ville": "Thiès",
-        "prix": "2 000 FCFA",
-        "horaires": "Dakar vers Thiès: 7h à 19h | Thiès vers Dakar: 6h à 19h",
-        "depart_dakar": "Gare de Colobane",
-        "depart_ville": "Grand Standing derrière station EDK OIL",
-        "frequence": "Tous les jours",
-        "phone": "+221 77 371 62 73"
-      },
-      {
-        "ville": "Mbour",
-        "prix": "2 500 FCFA",
-        "horaires": "Dakar: 8h et 16h | Mbour vers Dakar: 7h à 16h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Route nationale en face terrain Akhmadou Barro",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 12"
-      },
-      {
-        "ville": "Tivaouane",
-        "prix": "2 500 FCFA",
-        "horaires": "Tivaouane: 7h (sauf Vendredi: 7h et 17h30) | Dakar: Vendredi 10h et 17h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier El Malick SY 2, route de Ndiassane à côté du Lycée Ababacar SY",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 05"
-      },
-      {
-        "ville": "Fatick",
-        "prix": "3 000 FCFA",
-        "horaires": "7h et 15h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Boulevard en face keur Macky Sall",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 07"
-      },
-      {
-        "ville": "Diourbel",
-        "prix": "3 000 FCFA",
-        "horaires": "7h et 15h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier Cheikh Anta",
-        "frequence": "Tous les jours",
-        "phone": "+221 77 848 02 36"
-      },
-      {
-        "ville": "Kébémer",
-        "prix": "3 000 FCFA",
-        "horaires": "7h et 15h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Louga - Quartier Santhiaba Sud",
-        "frequence": "Tous les jours",
-        "phone": "+221 77 848 02 40"
-      },
-      {
-        "ville": "Louga",
-        "prix": "4 000 FCFA",
-        "horaires": "7h et 15h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier Santhiaba Sud, Route menant à la Gouvernance",
-        "frequence": "Tous les jours",
-        "phone": "+221 77 848 02 40"
-      },
-      {
-        "ville": "Touba",
-        "prix": "4 000 FCFA",
-        "horaires": "7h et 15h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "28 Pharmacie Sérigne Fallou Mbacké",
-        "frequence": "Tous les jours sauf Mercredi",
-        "phone": "+221 78 620 04 06"
-      },
-      {
-        "ville": "Kaolack",
-        "prix": "4 000 FCFA",
-        "horaires": "7h et 15h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier Casa ville en face gneti gouy",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 08"
-      },
-      {
-        "ville": "Kaffrine",
-        "prix": "5 000 FCFA",
-        "horaires": "Dakar: 7h (Lundi, Mercredi, Vendredi) | Kaffrine: 7h (Mardi, Jeudi, Samedi)",
-        "depart_dakar": "HLM Grand Yoff",
-        "depart_ville": "Cité Millionnaire (NDJIGUI 2)",
-        "frequence": "3 fois par semaine",
-        "phone": "+221 77 589 36 28"
-      },
-      {
-        "ville": "Saint-Louis",
-        "prix": "5 000 FCFA",
-        "horaires": "Dakar: 7h et 14h | Saint-Louis: 7h et 14h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Pikine Guinaw rail derrière la station OIL LYBIA",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 01"
-      },
-      {
-        "ville": "Bignona",
-        "prix": "8 000 FCFA",
-        "horaires": "Dakar: 8h | Bignona: 8h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Près du camp sapeur sur la piste en allant vers le stade",
-        "frequence": "Tous les jours",
-        "phone": "+221 77 846 02 93"
-      },
-      {
-        "ville": "Podor",
-        "prix": "8 000 FCFA",
-        "horaires": "Dakar: 7h | Podor: 6h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Lao demba ancien eno près du stade municipale alassane wade",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 02"
-      },
-      {
-        "ville": "Ndioum",
-        "prix": "8 000 FCFA",
-        "horaires": "Dakar: 7h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier Nianga, immeuble Harouna Dia Mélou",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 03"
-      },
-      {
-        "ville": "Tambacounda",
-        "prix": "9 000 FCFA",
-        "horaires": "Dakar: 7h (tous les jours) | Tambacounda: 8h30 (tous les jours sauf Jeudi)",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Médina Coura en face église Jean XXIII",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 11"
-      },
-      {
-        "ville": "Ziguinchor",
-        "prix": "9 000 FCFA",
-        "horaires": "Dakar: 8h | Ziguinchor: 7h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier Néma, Av. Emile Badiane, enface de la DRDR",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 09"
-      },
-      {
-        "ville": "Kolda",
-        "prix": "9 000 FCFA",
-        "horaires": "Dakar: 8h | Kolda: 7h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Derrière le stade régional près du pharmacie Tamarassy",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 620 04 10"
-      },
-      {
-        "ville": "Sédhiou",
-        "prix": "9 000 FCFA",
-        "horaires": "Dakar: 8h | Sédhiou: 7h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier Santassou",
-        "frequence": "Lundi, Mercredi et Samedi",
-        "phone": "+221 78 460 43 36"
-      },
-      {
-        "ville": "Ourossogui / Matam",
-        "prix": "10 000 FCFA",
-        "horaires": "Dakar: 8h | Matam: 6h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier Moderne 1 derrière hotel OASIS",
-        "frequence": "Lundi, Jeudi et Samedi",
-        "phone": "+221 78 620 04 04"
-      },
-      {
-        "ville": "Vélingara",
-        "prix": "11 000 FCFA",
-        "horaires": "Dakar: 8h | Vélingara: 7h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier HLM en face Station Elton",
-        "frequence": "Tous les jours",
-        "phone": "+221 78 460 43 37"
-      },
-      {
-        "ville": "Kédougou",
-        "prix": "12 000 FCFA",
-        "horaires": "Dakar: 7h | Kédougou: 7h",
-        "depart_dakar": "Terminus Liberté 5",
-        "depart_ville": "Quartier Gomba Villa 172",
-        "frequence": "Tous les jours",
-        "phone": "+221 77 385 32 61"
-      },
-      {
-        "ville": "Bakel",
-        "prix": "12 000 FCFA",
-        "horaires": "7h",
-        "depart_dakar": "HLM Grand Yoff",
-        "depart_ville": "HLM Bakel, coté CNCA",
-        "frequence": "Mardi, Vendredi, Dimanche",
-        "phone": "+221 78 184 58 88"
-      },
-      {
-        "ville": "Kidira",
-        "prix": "13 000 FCFA",
-        "horaires": "7h",
-        "depart_dakar": "Terminus HLM Grand Yoff",
-        "depart_ville": "Quartier Plateau, en face ancienne gare ferroviaire",
-        "frequence": "Lundi, Mercredi et Samedi",
-        "phone": "+221 33 824 10 10"
-      }
-    ]
-  }
 }
